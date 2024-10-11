@@ -18,42 +18,6 @@ def detect_keypoints_and_descriptors(image):
 
 
 def match_keypoints(descriptors1, descriptors2):
-    """Find matching key points between two images."""
-
-    descriptors1 = np.float32(descriptors1)
-    descriptors2 = np.float32(descriptors2)
-
-    bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck=False)
-    matches = bf.knnMatch(descriptors1, descriptors2, k=2)
-
-    good_matches = []
-    for m, n in matches:
-        if m.distance < 0.7 * n.distance:
-            good_matches.append(m)
-
-    return good_matches
-
-
-import cv2
-import numpy as np
-
-
-def load_image(image_path):
-    """Load an image in .jp2 format."""
-    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    if image is None:
-        raise ValueError(f"Failed to load image: {image_path}")
-    return image
-
-
-def detect_keypoints_and_descriptors(image):
-    """Detect key points and descriptors using ORB."""
-    orb = cv2.ORB_create()
-    keypoints, descriptors = orb.detectAndCompute(image, None)
-    return keypoints, descriptors
-
-
-def match_keypoints(descriptors1, descriptors2):
     """Find matching key points between two images using BFMatcher."""
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
     matches = bf.match(descriptors1, descriptors2)
