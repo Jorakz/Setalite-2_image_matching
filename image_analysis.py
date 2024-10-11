@@ -17,8 +17,32 @@ def detect_keypoints_and_descriptors(image):
         raise ValueError("No keypoints or descriptors found")
     return keypoints, descriptors
 
-
 def match_keypoints(descriptors1, descriptors2):
+    """Нахождение совпадающих ключевых точек между двумя изображениями."""
+    # Убедимся, что дескрипторы имеют правильный тип данных
+    if descriptors1 is None or descriptors2 is None:
+        return []
+
+    if len(descriptors1) == 0 or len(descriptors2) == 0:
+        return []
+
+    descriptors1 = np.float32(descriptors1)
+    descriptors2 = np.float32(descriptors2)
+
+    # Используем BFMatcher с нормой L2, так как SIFT использует эту норму
+    bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck=False)
+
+
+    matches = bf.knnMatch(descriptors1, descriptors2, k=2)
+
+
+    good_matches = []
+    for m, n in matches:
+        if m.distance < 0.75 * n.distance:
+            good_matches.append(m)
+
+    return good_matches
+def match_keypoints1(descriptors1, descriptors2):
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
     matches = bf.match(descriptors1, descriptors2)
     if not matches:
@@ -73,5 +97,6 @@ def process_images(image_path1, image_path2):
     except Exception as e:
         print(f"Error processing images: {e}")
         return None
+
 
 
