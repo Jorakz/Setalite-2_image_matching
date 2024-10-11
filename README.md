@@ -23,44 +23,23 @@ This dataset was developed by the Quantum in collaboration with V. N. Karazin Kh
 
 * load_image(image_path):
 
-This function reads an image from a specified file path using OpenCV's cv2.imread() with grayscale mode (cv2.IMREAD_GRAYSCALE).
-It checks whether the image was successfully loaded and raises an error if it fails.
-Returns the loaded grayscale image.
+This function loads a grayscale image from a specified file path (in .jp2 format). If the image fails to load, it raises a ValueError.
 
 * detect_keypoints_and_descriptors(image):
 
-Detects keypoints (distinctive features in the image) and computes descriptors (a set of values describing each keypoint) using the ORB (Oriented FAST and Rotated BRIEF) algorithm.
-ORB is a fast and efficient algorithm commonly used for feature detection in tasks like object recognition, image stitching, and satellite image matching.
-Raises an error if no keypoints or descriptors are found.
-Returns the keypoints and descriptors for the image.
+It detects keypoints and descriptors from an image using the ORB (Oriented FAST and Rotated BRIEF) algorithm.
 
 * match_keypoints(descriptors1, descriptors2):
 
-Matches the descriptors of the two images using a brute-force matcher (BFMatcher) with the Hamming distance as a similarity metric. The crossCheck=True ensures that only mutually consistent matches are kept.
-Sorts the matches by their distance (closer matches are more similar).
-Raises an error if no matches are found.
-Returns a list of the best matches between the two images.
-In code, KNN (K-Nearest Neighbors) refers to the algorithm used to find the best matches between feature descriptors extracted from two satellite images. 
+This function matches keypoints between two images using a brute-force matcher (BFMatcher) with Hamming distance, and sorts the matches based on their distance (i.e., similarity).
 
 * draw_matches(image1, keypoints1, image2, keypoints2, matches):
 
-This function visually illustrates the matches between the two images. It creates a new image that combines both input images side by side and draws lines between corresponding matched keypoints.
-The color and thickness of the circles and lines are randomized to make the matches visually distinctive.
-Returns the combined image with the drawn matches.'
-
-* resize_image(image, target_shape):
-
-Resizes the input image to match the shape of a target image using linear interpolation. This ensures that both images are of the same size before feature matching.
-This is particularly useful for satellite images, which might have different resolutions depending on the sensor or acquisition conditions.
+Draws lines between the matched keypoints from two images. It creates a composite image where both images are placed side by side, and colorful lines are drawn between the matching points.
 
 * process_images(image_path1, image_path2):
 
-This is the main function that coordinates the entire process. It:
-Loads the two images from their file paths.
-Resizes the images to have the same dimensions if needed.
-Detects keypoints and computes descriptors for both images.
-Matches the descriptors from both images.
-Draws the matches on a combined image.
+This is the main function to process two images. It loads them, detects keypoints and descriptors, matches the keypoints, and then visualizes the matches by drawing lines between the corresponding keypoints.
 
 ## Conclusion
 This project implements a keypoint detection and matching system for satellite imagery using OpenCV's ORB algorithm. The core functionality involves loading grayscale images, detecting keypoints, and matching descriptors using brute-force methods. It also visualizes the matches between two images, highlighting their similarities. This approach can be applied to tasks such as satellite image alignment, change detection, and temporal analysis of geographic areas.
