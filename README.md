@@ -33,13 +33,14 @@ Detects keypoints (distinctive features in the image) and computes descriptors (
 ORB is a fast and efficient algorithm commonly used for feature detection in tasks like object recognition, image stitching, and satellite image matching.
 Raises an error if no keypoints or descriptors are found.
 Returns the keypoints and descriptors for the image.
+
 * match_keypoints(descriptors1, descriptors2):
 
 Matches the descriptors of the two images using a brute-force matcher (BFMatcher) with the Hamming distance as a similarity metric. The crossCheck=True ensures that only mutually consistent matches are kept.
 Sorts the matches by their distance (closer matches are more similar).
 Raises an error if no matches are found.
 Returns a list of the best matches between the two images.
-In code, KNN (K-Nearest Neighbors) refers to the algorithm used to find the best matches between feature descriptors extracted from two satellite images. Specifically, knnMatch is the function provided by OpenCV to match these descriptors.
+In code, KNN (K-Nearest Neighbors) refers to the algorithm used to find the best matches between feature descriptors extracted from two satellite images. 
 
 * draw_matches(image1, keypoints1, image2, keypoints2, matches):
 
