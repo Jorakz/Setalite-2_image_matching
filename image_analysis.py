@@ -18,6 +18,7 @@ def detect_keypoints_and_descriptors(image):
     return keypoints, descriptors
 
 def match_keypoints(descriptors1, descriptors2):
+
     if descriptors1 is None or descriptors2 is None:
         return []
 
@@ -27,7 +28,7 @@ def match_keypoints(descriptors1, descriptors2):
     descriptors1 = np.float32(descriptors1)
     descriptors2 = np.float32(descriptors2)
 
-    # Используем BFMatcher с нормой L2, так как SIFT использует эту норму
+
     bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck=False)
 
 
@@ -40,13 +41,7 @@ def match_keypoints(descriptors1, descriptors2):
             good_matches.append(m)
 
     return good_matches
-def match_keypoints1(descriptors1, descriptors2):
-    bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
-    matches = bf.match(descriptors1, descriptors2)
-    if not matches:
-        raise ValueError("No matches found")
-    matches = sorted(matches, key=lambda x: x.distance)
-    return matches
+
 
 
 def draw_matches(image1, keypoints1, image2, keypoints2, matches):
@@ -95,6 +90,7 @@ def process_images(image_path1, image_path2):
     except Exception as e:
         print(f"Error processing images: {e}")
         return None
+
 
 
 
