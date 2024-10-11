@@ -18,8 +18,6 @@ def detect_keypoints_and_descriptors(image):
     return keypoints, descriptors
 
 def match_keypoints(descriptors1, descriptors2):
-    """Нахождение совпадающих ключевых точек между двумя изображениями."""
-    # Убедимся, что дескрипторы имеют правильный тип данных
     if descriptors1 is None or descriptors2 is None:
         return []
 
