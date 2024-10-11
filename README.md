@@ -14,10 +14,10 @@ This dataset was developed by the Quantum in collaboration with V. N. Karazin Kh
 
 ## Usage
 
-* image analysis.py: algorithm for redaction data and matching satellite images.
-* inference.py: Runs algorithm for image analysis.
+* data_analyze.py: algorithm for redaction data and matching satellite images.
+* data_main.py: Runs algorithm for image analysis.
 * requirements.txt: Lists the required libraries for the project.
-* demo.ipynb: Jupyter notebook with demo.
+* data_demo.ipynb: Jupyter notebook with demo.
   
 ## Funtion 
 
