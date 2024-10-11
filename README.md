@@ -39,6 +39,7 @@ Matches the descriptors of the two images using a brute-force matcher (BFMatcher
 Sorts the matches by their distance (closer matches are more similar).
 Raises an error if no matches are found.
 Returns a list of the best matches between the two images.
+In code, KNN (K-Nearest Neighbors) refers to the algorithm used to find the best matches between feature descriptors extracted from two satellite images. Specifically, knnMatch is the function provided by OpenCV to match these descriptors.
 
 * draw_matches(image1, keypoints1, image2, keypoints2, matches):
 
